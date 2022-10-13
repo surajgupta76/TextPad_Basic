@@ -3,6 +3,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JFileChooser;
 
 import java.awt.Color;
@@ -18,7 +19,8 @@ import java.io.File;
 class Notepad_accio implements ActionListener{
     JFrame f;
     JMenuBar menubar;
-    JMenu file,Themes;
+    JScrollPane scroll;
+    JMenu file,Themes,Save;
     JMenuItem open,New,dark,light;
     JTextArea textarea;
 
@@ -29,6 +31,7 @@ class Notepad_accio implements ActionListener{
         Themes = new JMenu("Themes");
         menubar.add(file);
         menubar.add(Themes);
+        menubar.add(Save);
         f.setJMenuBar(menubar);
 
 
@@ -41,12 +44,20 @@ class Notepad_accio implements ActionListener{
         Themes.add(dark);
         Themes.add(light);
 
-        textarea = new JTextArea(50,70);
+      
+
+        textarea = new JTextArea(32,88);
         f.add(textarea);
         open.addActionListener(this); //open the file
         New.addActionListener(this);
         dark.addActionListener(this);
         light.addActionListener(this);
+        Save.addActionListener(this);
+        scroll = new JScrollPane(textarea);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        f.add(scroll);
+
 
         f.setSize(1000,596);
         f.setResizable(false);
@@ -101,6 +112,7 @@ class Notepad_accio implements ActionListener{
         }
     }
     if (e.getSource()==New) textarea.setText("");
+    
 
     if(e.getSource()==dark) 
     {
